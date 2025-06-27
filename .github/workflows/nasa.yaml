@@ -11,11 +11,7 @@ jobs:
     steps:
       - name: Curl API with secret key
         run: |
-          curl "https://api.nasa.gov/planetary/apod?api_key=${{ secrets.NASA_API_KEY }}"
-          
-      - name: Extract HD image URL
-        id: extract_hdurl
-        run: |
+          curl "https://api.nasa.gov/planetary/apod?api_key=${{ secrets.NASA_API_KEY }}" -o apod.json
           HDURL=$(jq -r .hdurl apod.json)
           echo "HDURL=$HDURL" >> $GITHUB_ENV
 
