@@ -12,11 +12,18 @@ jobs:
       - name: Curl API with secret key
         run: |
           curl "https://api.nasa.gov/planetary/apod?api_key=${{ secrets.NASA_API_KEY }}" -o apod.json
+      
+      - name: Upload JSON as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nasa-apod-json
+          path: apod.json
+
+      - name: Extract and Download HD image URL
+        id: extract_hdurl
+        run: |
           HDURL=$(jq -r .hdurl apod.json)
           echo "HDURL=$HDURL" >> $GITHUB_ENV
-
-      - name: Download HD image
-        run: |
           curl "$HDURL" -o apod_hd.jpg
 
       - name: Upload HD image as artifact
