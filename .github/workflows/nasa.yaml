@@ -1,0 +1,14 @@
+name: Curl API with Secret
+
+on:
+  push:
+    branches:
+      - main  # or your branch name
+
+jobs:
+  curl-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Curl API with secret key
+        run: |
+          curl -H https://api.nasa.gov/planetary/apod?api_key=${{ secrets.NASA_API_KEY }}
