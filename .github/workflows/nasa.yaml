@@ -11,4 +11,4 @@ jobs:
     steps:
       - name: Curl API with secret key
         run: |
-          curl "https://api.nasa.gov/planetary/apod?api_key=${{ secrets.NASA_API_KEY }}" -o apod.json
+          curl "https://api.nasa.gov/planetary/apod?api_key=${{ secrets.NASA_API_KEY }}"
